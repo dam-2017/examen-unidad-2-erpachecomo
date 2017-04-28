@@ -16,6 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class Registro {
   name:any='';
   rfc:any='';
+  rfcvalue:string='';
   lastname:any='';
   lastname2:any='';
   birth:any='';
@@ -36,35 +37,18 @@ export class Registro {
   }
   updateRFC(ev){
     let vocals:string='AEIOUÁÉÍÓÚ';
+    let badWords:string[]=['DE','DEL', 'DE LAS', 'DE LOS','DA', 'DE','D','DES', 'DU','VON','VAN', 'VANDEN', 'Y','VANDER'];
     let ln:string=this.lastname.value.toUpperCase();
     let ln2:string=this.lastname2.value.toUpperCase();
-    ln=ln.replace(' DE ','');
-    ln=ln.replace(' DEL ','');
-    ln=ln.replace(' LAS ','');
-    ln=ln.replace(' LA ','');
-    ln=ln.replace(' LO ','');
-    ln=ln.replace(' LOS ','');
-    if(ln.startsWith('DE ')||ln.startsWith('DEL ')||ln.startsWith('LAS ')||ln.startsWith('LA ')||ln.startsWith('LO ')||ln.startsWith('LOS ')){
-      ln=ln.replace('DE ','');
-      ln=ln.replace('DEL ','');
-      ln=ln.replace('LAS ','');
-      ln=ln.replace('LA ','');
-      ln=ln.replace('LO ','');
-      ln=ln.replace('LOS ','');
-    }
-    ln2=ln2.replace(' DE ','');
-    ln2=ln2.replace(' DEL ','');
-    ln2=ln2.replace(' LAS ','');
-    ln2=ln2.replace(' LA ','');
-    ln2=ln2.replace(' LO ','');
-    ln2=ln2.replace(' LOS ','');
-    if(ln2.startsWith('DE ')||ln2.startsWith('DEL ')||ln2.startsWith('LAS ')||ln2.startsWith('LA ')||ln2.startsWith('LO ')||ln2.startsWith('LOS ')){
-      ln2=ln2.replace('DE ','');
-      ln2=ln2.replace('DEL ','');
-      ln2=ln2.replace('LAS ','');
-      ln2=ln2.replace('LA ','');
-      ln2=ln2.replace('LO ','');
-      ln2=ln2.replace('LOS ','');
+    for(let i=0;i<badWords.length;i++){
+      ln=ln.replace(' '+badWords[i]+' ','');
+      if(ln.startsWith(badWords[i]+' ')){
+        ln=ln.replace(badWords[i]+' ','');  
+      }
+      ln2=ln2.replace(' '+badWords[i]+' ','');
+      if(ln2.startsWith(badWords[i]+' ')){
+        ln2=ln2.replace(badWords[i]+' ','');  
+      }
     }
     let n:string=this.name.value.toUpperCase();
     let b:string[]=this.birth.value.split('/');    
@@ -74,39 +58,42 @@ export class Registro {
     console.log(b);
     //R1
     if(ln.length>2){
+      this.rfcvalue=ln.charAt(0)+ln.charAt(1);
       for(let i=1;i<ln.length;i++){
-        if(vocals.includes(ln.charAt(i),0)){
-          this.rfc.value=ln.charAt(0)+ln.charAt(i);
+        if(vocals.includes(ln.charAt(i),-1)){
+          this.rfcvalue=ln.charAt(0)+ln.charAt(i);
         }
       }
-      this.rfc.value+=ln2.charAt(0);
+      this.rfcvalue+=ln2.charAt(0);
       if(n.includes(' ')){
         let names:string[]=n.split(' ');
         let containsJoseMaria:boolean=false;
           for(let i=0;i<names.length;i++){
-            if(names[i]!='JOSE'&&names[i]!='MARIA'){
+            if(names[i]==='JOSE'||names[i]==='MARIA'){
               containsJoseMaria=true;
-              this.rfc.value+=names[i][0];
+              this.rfcvalue+=names[i][0];
             }
           }
           if(!containsJoseMaria){
-            this.rfc.value+=n.charAt(0);    
+            this.rfcvalue+=n.charAt(0);    
           }
       }else{
-        this.rfc.value+=n.charAt(0);
+        this.rfcvalue+=n.charAt(0);
       }
     }else{
       //R3
-      this.rfc.value=ln.charAt(0);
-      this.rfc.value+=ln2.charAt(0);
-      this.rfc.value+=n.charAt(0)+n.charAt(1);
+      this.rfcvalue=ln.charAt(0);
+      this.rfcvalue+=ln2.charAt(0);
+      this.rfcvalue+=n.charAt(0)+n.charAt(1);
       
     }
     
-    this.rfc.value+=b[0].substr(2,3);
-    this.rfc.value+=b[1];
-    this.rfc.value+=b[2];
-    console.log(this.rfc.value);
+    this.rfcvalue+=b[0].substr(2,3);
+    this.rfcvalue+=b[1];
+    this.rfcvalue+=b[2];
+    this.rfcvalue=this.rfcvalue.replace('PUTO','PUTX');
+    this.rfcvalue=this.rfcvalue.replace('PENE','PENX');
+    console.log(this.rfcvalue);
   }
   register(){
     

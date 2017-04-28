@@ -42,7 +42,7 @@
              </ion-item>
                    <p *ngIf='birth.hasError("pattern") && birth.touched'>Formato incorrecto. Debe ser AAAA/MM/dd</p>
             <ion-item>
-                   <ion-label stacked>RFC</ion-label>               
+                   <ion-label stacked>RFC: {{rfcvalue}}</ion-label>               
                    <ion-input formControlName='rfc' readonly type="text"></ion-input>
              </ion-item>
         </ion-list>
