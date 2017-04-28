@@ -37,7 +37,7 @@ export class Registro {
   }
   updateRFC(ev){
     let vocals:string='AEIOUÁÉÍÓÚ';
-    let badWords:string[]=['DE','DEL', 'DE LAS', 'DE LOS','DA', 'DE','D','DES', 'DU','VON','VAN', 'VANDEN', 'Y','VANDER'];
+    let badWords:string[]=['DE','DEL', 'DE LAS', 'DE LOS','DA','LA','LO','DE','D','DES', 'DU','VON','VAN', 'VANDEN', 'Y','VANDER'];
     let ln:string=this.lastname.value.toUpperCase();
     let ln2:string=this.lastname2.value.toUpperCase();
     for(let i=0;i<badWords.length;i++){
@@ -66,13 +66,19 @@ export class Registro {
         }
       }
       this.rfcvalue+=ln2.charAt(0);
+      console.log(n);
       if(n.includes(' ')){
         let names:string[]=n.split(' ');
+        console.log(names);
         let containsJoseMaria:boolean=false;
           for(let i=0;i<names.length;i++){
+            console.log(names[i]);            
             if(names[i]==='JOSE'||names[i]==='MARIA'){
               containsJoseMaria=true;
+            }else{
               this.rfcvalue+=names[i][0];
+              containsJoseMaria=false;
+              
             }
           }
           if(!containsJoseMaria){
