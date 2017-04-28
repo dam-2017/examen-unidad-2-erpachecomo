@@ -74,10 +74,10 @@ export class Registro {
           for(let i=0;i<names.length;i++){
             console.log(names[i]);            
             if(names[i]==='JOSE'||names[i]==='MARIA'){
-              containsJoseMaria=true;
+              
             }else{
               this.rfcvalue+=names[i][0];
-              containsJoseMaria=false;
+              containsJoseMaria=true;
               
             }
           }
