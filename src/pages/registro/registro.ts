@@ -60,8 +60,9 @@ export class Registro {
     if(ln.length>2){
       this.rfcvalue=ln.charAt(0)+ln.charAt(1);
       for(let i=1;i<ln.length;i++){
-        if(vocals.includes(ln.charAt(i),-1)){
+        if(vocals.includes(ln.charAt(i),0)){
           this.rfcvalue=ln.charAt(0)+ln.charAt(i);
+          i=ln.length;
         }
       }
       this.rfcvalue+=ln2.charAt(0);
