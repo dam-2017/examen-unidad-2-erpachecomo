@@ -14,7 +14,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,fb:FormBuilder) {
     this.LoginForm=fb.group({
       user:['erpachecomo',[Validators.required,Validators.minLength(6),Validators.pattern(/^[a-z]+$/)]],
-      password:['12400306@ittepic',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[|@#%&])$/)]]
+      password:['12400306@ittepic',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[|@#%&])/g)]]
     });
     this.user=this.LoginForm.controls['user'];
     this.password=this.LoginForm.controls['password'];

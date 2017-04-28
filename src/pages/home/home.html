@@ -8,6 +8,9 @@
 
 <ion-content padding>
   <ion-card>
+      <ion-card-header>
+          <p *ngIf='wrongData'>Usuario y/o contraseña incorrectos</p>        
+      </ion-card-header>
     <ion-card-content>
       <form [formGroup]='LoginForm' (ngSubmit)='login()'>
         <ion-list no-lines>
