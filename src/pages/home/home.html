@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]='LoginForm' (ngSubmit)='login()'>
+        <ion-list no-lines>
+             <ion-item>
+                   <ion-label floating>Usuario</ion-label>
+               
+                   <ion-input type="text" formControlName='user'></ion-input>
+                   
+             </ion-item>
+                   <p *ngIf='user.hasError("required") && user.touched'>Campo requerido</p>
+                   <p *ngIf='user.hasError("minlength") && user.touched'>Al menos 6 caracteres</p>
+                   <p *ngIf='user.hasError("pattern") && user.touched'>Solo minúsculas</p>
+             <ion-item>
+                   <ion-label floating>Contraseña</ion-label>               
+                   <ion-input type="password" formControlName='password'></ion-input>
+                   
+             </ion-item>
+             <p *ngIf='password.hasError("required") && password.touched'>Campo requerido</p>
+                   <p *ngIf='password.hasError("minlength") && password.touched'>Al menos 8 caracteres</p>
+                   <p *ngIf='password.hasError("pattern") && password.touched'>Debe contener un simbolo y un numero</p>
+        </ion-list>
+      
+        <button block ion-button type="submit" [disabled]='!LoginForm.valid'>Continuar</button>
+        </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
